@@ -35,10 +35,5 @@ def remove_the_last_person(queue: list[str]) -> str:
 
 
 def sorted_names(queue: list[str]) -> list[str]:
-    """Sort the names in the queue in alphabetical order and return the result.
-
-    :param queue: list - names in the queue.
-    :return: list - copy of the queue in alphabetical order.
-    """
     queue.sort()
     return queue
