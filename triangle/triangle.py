@@ -1,31 +1,18 @@
 def equilateral(sides: list[float]) -> bool:
     a, b, c = sides
-    if is_triangle(sides):
-        if a == b == c:
-            return True
-    return False
+    return is_triangle(sides) and (a == b == c)
 
 
 def isosceles(sides: list[float]) -> bool:
     a, b, c = sides
-    if is_triangle(sides):
-        if a == b or b == c or a == c:
-            return True
-    return False
+    return is_triangle(sides) and (a == b or b == c or a == c)
 
 
 def scalene(sides: list[float]) -> bool:
     a, b, c = sides
-    if is_triangle(sides):
-        if a != b and b != c and a != c:
-            return True
-    return False
+    return is_triangle(sides) and (a != b and b != c and a != c)
 
 
 def is_triangle(sides: list[float]) -> bool:
     a, b, c = sides
-    if a + b + c > 0:
-        if a + b >= c and b + c >= a and a + c >= b:
-            return True
-        return False
-    return False
+    return (a + b + c > 0) and (a + b >= c and b + c >= a and a + c >= b)
