@@ -11,3 +11,6 @@ def score(x, y):
         return 5
     else:
         return 10
+
+
+print(score(10, 0))
