@@ -1,5 +1,8 @@
+from string import ascii_lowercase
+
+
 def is_pangram(sentence: str):
-    alphabet = {'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z'}
+    alphabet = set(ascii_lowercase)
     lowercase_sentence = sentence.lower()
     result = set(lowercase_sentence)
     if alphabet <= result:
