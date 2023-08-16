@@ -1,24 +1,21 @@
 def is_valid(isbn: str):
     isbn = isbn.replace("-", "")
     result = 0
-    infinite_number = "0123456789"
 
-    if len(isbn) == 10:
-        if isbn[-1] != "X" and isbn[-1] not in infinite_number:
-            return False
-        
-        if isbn[-1] == "X":
-            isbn[-1] = "10"
-        
-        for index, digit in enumerate(isbn):
-            factor = len(isbn) - index
-            product = int(digit) * factor
-            result += product
-    
-        if result % 11 == 0:
-            return True
+    if len(isbn) != 10:
         return False
+    else:
+        for index, digit in enumerate(isbn):
+            if digit.isdigit():
+                result += int(digit) * (len(isbn) - index)
+            elif isbn[-1] == "X":
+                result += 10
+            else:
+                return False
+            
+    if result % 11 == 0:
+        return True
     return False
 
 
-print(is_valid("3-598-21508-X"))
+print(is_valid("3-598-21507-X"))
