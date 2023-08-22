@@ -7,14 +7,12 @@ def rotate(text: str, key: int) -> str:
     resulting_list = []
     for letter in text:
         if letter.isupper():
-            unicode_char = ord(letter)
-            shifted_char = unicode_char + key
-            char = chr(shifted_char)
+            shifted_char = (alphabet_uppercase.index(letter) + key) % 26
+            char = alphabet_uppercase[shifted_char]
             resulting_list.append(char)
         elif letter.islower():
-            unicode_char = ord(letter)
-            shifted_char = unicode_char + key
-            char = chr(shifted_char)
+            shifted_char = (alphabet_lowercase.index(letter) + key) % 26
+            char = alphabet_lowercase[shifted_char]
             resulting_list.append(char)
         else:
             resulting_list.append(letter)
