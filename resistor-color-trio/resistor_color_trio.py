@@ -14,7 +14,7 @@ color_values = {
 
 def value(colors: list[str]) -> int:
     """Changes the first two colors into an integer."""
-    result = []
+    result: list[int] = []
     for color in colors:
         if color in color_values:
             number = color_values[color]
