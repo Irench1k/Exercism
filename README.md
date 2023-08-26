@@ -1,2 +1,2 @@
-# Exercism
-My solutions for exercism tasks
+# Exercism Python
+My solutions for exercism tasks in python!
