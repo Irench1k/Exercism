@@ -16,25 +16,31 @@ def value(colors: list[str]) -> int:
     """Changes the first two colors into an integer."""
     result: list[int] = []
     for color in colors:
-        if color in color_values:
-            number = color_values[color]
-            result.append(number)
+        if len(colors) == 4:
+            result.append(color_values[color])
             if len(result) == 2:
                 break
-    if result:
-        final = int(''.join(map(str, result)))
-        return final
-    else:
-        return 0
+        else:
+            result.append(color_values[color])
+            if len(result) == 3:
+                break
+    return int(''.join(map(str, result)))
 
 
 def get_ohms(colors: list[str]) -> int:
     """Calculates the third colour into a power of 10."""
-    if colors[2] in color_values:
-        zeros = color_values[colors[2]]
-        return 10 ** zeros
+    if len(colors) == 4:
+        if colors[2] in color_values:
+            zeros = color_values[colors[2]]
+            return 10 ** zeros
+        else:
+            return 1
     else:
-        return 1
+        if colors[3] in color_values:
+            zeros = color_values[colors[2]]
+            return 10 ** zeros
+        else:
+            return 1
 
 
 def label(colors: list[str]) -> str:
@@ -57,4 +63,4 @@ def label(colors: list[str]) -> str:
     return f"{last_chance} {prefix}ohms"
 
 
-print(label(["red", "black", "red"]))
+print(label(["orange", "orange", "black", "red", "green"]))
