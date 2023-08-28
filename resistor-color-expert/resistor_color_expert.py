@@ -42,45 +42,48 @@ def value(colors: list[str]) -> int:
 
 def get_ohms(colors: list[str]) -> int:
     """Calculates the third/fourth colour into a power of 10."""
-    if len(colors) == 4:
-        if colors[2] in color_values:
-            zeros = color_values[colors[2]]
-            return 10 ** zeros
-        else:
-            return 1
+    if colors[-2] in color_values:
+        zeros = color_values[colors[-2]]
+        return 10 ** zeros
     else:
-        if colors[3] in color_values:
-            zeros = color_values[colors[2]]
-            return 10 ** zeros
-        else:
-            return 1
+        return 1
 
 
 def get_tolerance(colors: list[str]) -> float:
-    result = [color_tolerance[color] for color in [colors[-1]]]
-    return result[0]
+    """Converts the last color into the tolerance value."""
+    return color_tolerance[colors[-1]]
+
+
+def get_prefix(resistance: int, divider: int) -> int | float:
+    """Converts result into an integer if the result is 2.0 == 2."""
+    if resistance % divider == 0:
+        return int(resistance / divider)
+    else:
+        return resistance / divider
 
 
 def resistor_label(colors: list[str]):
-    """Main function of the program"""
+    """Main function of the program."""
+    if len(colors) == 1:
+        return "0 ohms"
+
     ohms = get_ohms(colors)
     resistance_value = value(colors)
     tolerance = get_tolerance(colors)
     last_chance = (resistance_value * ohms)
     if last_chance >= 1_000_000_000:
         prefix = "giga"
-        last_chance //= 1_000_000_000
+        last_chance = get_prefix(last_chance, 1_000_000_000)
     elif last_chance >= 1_000_000:
         prefix = "mega"
-        last_chance //= 1_000_000
+        last_chance = get_prefix(last_chance, 1_000_000)
     elif last_chance >= 1_000:
         prefix = "kilo"
-        last_chance //= 1_000
+        last_chance = get_prefix(last_chance, 1_000)
     else:
         prefix = ""
     
     return f"{last_chance} {prefix}ohms ± {tolerance}%"
 
 
-
-print(resistor_label(["orange", "orange", "black", "red"]))
+print(resistor_label(["orange", "orange", "yellow", "black", "brown"]))
